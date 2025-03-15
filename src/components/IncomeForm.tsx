@@ -1,23 +1,18 @@
-// components/IncomeForm.tsx
 import React, { useState } from 'react';
-import { Button, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { addIncome } from '../firebase/incomeService';
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 const IncomeForm: React.FC = () => {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
 
-  const handleSubmit = async () => {
-    if (category && amount) {
-      await addIncome(category, parseFloat(amount));
-      setCategory('');
-      setAmount('');
-    }
+  const handleSubmit = () => {
+    // Логика для добавления дохода
+    console.log(`Категория: ${category}, Сумма: ${amount}`);
   };
 
   return (
-    <div>
-      <FormControl fullWidth>
+    <Box sx={{ padding: '2rem', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: 2 }}>
+      <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
         <InputLabel>Категория</InputLabel>
         <Select
           value={category}
@@ -33,11 +28,17 @@ const IncomeForm: React.FC = () => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         fullWidth
+        sx={{ marginBottom: '1rem' }}
       />
-      <Button onClick={handleSubmit} variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        fullWidth
+      >
         Добавить доход
       </Button>
-    </div>
+    </Box>
   );
 };
 

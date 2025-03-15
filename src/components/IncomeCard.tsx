@@ -1,7 +1,6 @@
-// components/IncomeCard.tsx
 import React from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
-import { addIncome } from '../firebase/incomeService';
+import { addIncome } from '../services/incomeService';
 
 interface IncomeCardProps {
   category: string;

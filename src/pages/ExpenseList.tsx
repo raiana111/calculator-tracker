@@ -1,6 +1,5 @@
-// pages/ExpenseList.tsx
 import React, { useEffect, useState } from 'react';
-import { getExpenses } from '../firebase/expenseService';
+import { getExpenses } from '../services/expenseService';
 import ExpenseCard from '../components/ExpenseCard';
 
 const ExpenseList: React.FC = () => {
@@ -16,7 +15,6 @@ const ExpenseList: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    // Удаление записи
     await firebase.database().ref('expenses').child(id).remove();
     setExpenses((prev) => prev.filter((expense) => expense.id !== id));
   };

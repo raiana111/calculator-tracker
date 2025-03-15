@@ -1,6 +1,5 @@
-// pages/IncomeList.tsx
 import React, { useEffect, useState } from 'react';
-import { getIncomes } from '../firebase/incomeService';
+import { getIncomes } from '../services/incomeService';
 import IncomeCard from '../components/IncomeCard';
 
 const IncomeList: React.FC = () => {
@@ -16,7 +15,6 @@ const IncomeList: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    // Удаление записи
     await firebase.database().ref('incomes').child(id).remove();
     setIncomes((prev) => prev.filter((income) => income.id !== id));
   };

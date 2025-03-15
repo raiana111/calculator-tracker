@@ -1,23 +1,18 @@
-// components/ExpenseForm.tsx
 import React, { useState } from 'react';
-import { Button, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { addExpense } from '../firebase/expenseService';
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 const ExpenseForm: React.FC = () => {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
 
-  const handleSubmit = async () => {
-    if (category && amount) {
-      await addExpense(category, parseFloat(amount));
-      setCategory('');
-      setAmount('');
-    }
+  const handleSubmit = () => {
+    // Здесь будет логика добавления расхода
+    console.log(`Категория: ${category}, Сумма: ${amount}`);
   };
 
   return (
-    <div>
-      <FormControl fullWidth>
+    <Box sx={{ padding: '2rem', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: 2 }}>
+      <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
         <InputLabel>Категория</InputLabel>
         <Select
           value={category}
@@ -25,6 +20,7 @@ const ExpenseForm: React.FC = () => {
         >
           <MenuItem value="food">Продукты</MenuItem>
           <MenuItem value="transport">Транспорт</MenuItem>
+          <MenuItem value="utilities">Коммунальные услуги</MenuItem>
         </Select>
       </FormControl>
       <TextField
@@ -33,11 +29,17 @@ const ExpenseForm: React.FC = () => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         fullWidth
+        sx={{ marginBottom: '1rem' }}
       />
-      <Button onClick={handleSubmit} variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        fullWidth
+      >
         Добавить расход
       </Button>
-    </div>
+    </Box>
   );
 };
 
